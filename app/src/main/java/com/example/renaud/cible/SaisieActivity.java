@@ -11,7 +11,9 @@ import java.util.List;
 
 public class SaisieActivity extends AppCompatActivity {
 
-    List<cinqTir> listeDesTirs;
+    List<CinqTir> listeDesTirs;
+
+    CinqTir cinqTirsActuel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,7 +22,10 @@ public class SaisieActivity extends AppCompatActivity {
 
         displayDate();
 
-        listeDesTirs.add(new cinqTir());
+        cinqTirsActuel = new CinqTir();
+
+
+
     }
 
     private void displayDate() {
@@ -38,14 +43,21 @@ public class SaisieActivity extends AppCompatActivity {
 
     public void handleClickButton0(View v) {
         TextView tv = (TextView) findViewById(R.id.textViewSaisie);
-        tv.append(" 0");
+        cinqTirsActuel.AjoutResultat(0);
+        tv.setText(cinqTirsActuel.GetResultatLigne());
     }
 
-    public void handleClickButtonCancelLast(View v) {
-
+    public void handleClickButtonCancelLast(View v)
+    {
+        TextView tv = (TextView) findViewById(R.id.textViewSaisie);
+        cinqTirsActuel.EnleveLeDernierResultat();
+        tv.setText(cinqTirsActuel.GetResultatLigne());
     }
-    public void handleClickButtonOk(View v) {
 
+    public void handleClickButtonOk(View v)
+    {
+        TextView tv = (TextView) findViewById(R.id.textViewSaisie);
+        tv.setText(cinqTirsActuel.GetResultatLigne());
     }
 
 }

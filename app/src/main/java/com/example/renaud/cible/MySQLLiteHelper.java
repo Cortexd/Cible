@@ -7,7 +7,7 @@ import android.util.Log;
 
 // Classe utilitaire de creation de base de données
 //
-public abstract class MySQLLiteHelper extends SQLiteOpenHelper
+public class MySQLLiteHelper extends SQLiteOpenHelper
 {
 
 

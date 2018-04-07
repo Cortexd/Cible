@@ -7,49 +7,79 @@
     android:layout_height="match_parent"
     tools:context="com.example.renaud.cible.SaisieActivity">
 
-
-    <TextView
-        android:id="@+id/textViewDate"
-        android:layout_width="366dp"
-        android:layout_height="26dp"
+    <LinearLayout
+        android:layout_width="365dp"
+        android:layout_height="44dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="Date"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toTopOf="@+id/textViewSaisie"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <EditText
+            android:id="@+id/editTextDate"
+            android:layout_width="118dp"
+            android:layout_height="match_parent"
+            android:ems="10"
+            android:inputType="date"
+            tools:text="01/05/2018" />
+        <Button
+            android:id="@+id/buttonEditDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:text=".."
+            android:onClick="actionEditDate"/>
+        <EditText
+            android:id="@+id/editTextTime"
+            android:layout_width="86dp"
+            android:layout_height="match_parent"
+            android:ems="10"
+            android:inputType="time"
+            tools:text="18:00" />
+        <Button
+            android:id="@+id/buttonEditHeure"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:text=".."
+            android:onClick="actionEditHeure"/>
+
+    </LinearLayout>
+
 
     <TextView
         android:id="@+id/textViewSaisie"
         android:layout_width="368dp"
-        android:layout_height="47dp"
+        android:layout_height="38dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        tools:text="7,8,9,10,9 (Tot  : 38/50, Moy : 7)"
+        android:drawableBottom="@color/colorAccent"
         android:textSize="50px"
         app:layout_constraintBottom_toTopOf="@+id/listView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        android:drawableBottom="@color/colorAccent"
-        />
+        tools:text="7,8,9,10,9 (Tot  : 38/50, Moy : 7)" />
 
     <ListView
 
         android:id="@+id/listView"
-        android:layout_width="365dp"
-        android:layout_height="109dp"
+        android:layout_width="366dp"
+        android:layout_height="118dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         app:layout_constraintBottom_toTopOf="@+id/gridLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:listitem="@layout/row_cinqtir"
-       />
+        tools:listitem="@layout/row_cinqtir" />
 
     <GridLayout
         android:id="@+id/gridLayout"
@@ -125,81 +155,81 @@
         <Button
             android:id="@+id/button6"
             android:layout_column="2"
-            android:layout_row="1"
-            android:onClick="handleClickButton6"
-            android:text="6"
             android:layout_columnWeight="1"
-            android:layout_rowWeight="1"/>
+            android:layout_row="1"
+            android:layout_rowWeight="1"
+            android:onClick="handleClickButton6"
+            android:text="6" />
 
         <Button
             android:id="@+id/button7"
             android:layout_column="3"
-            android:layout_row="1"
-            android:onClick="handleClickButton7"
-            android:text="7"
             android:layout_columnWeight="1"
-            android:layout_rowWeight="1"/>
+            android:layout_row="1"
+            android:layout_rowWeight="1"
+            android:onClick="handleClickButton7"
+            android:text="7" />
 
         <Button
             android:id="@+id/button8"
             android:layout_column="0"
-            android:layout_row="2"
-            android:onClick="handleClickButton8"
-            android:text="8"
             android:layout_columnWeight="1"
-            android:layout_rowWeight="1"/>
+            android:layout_row="2"
+            android:layout_rowWeight="1"
+            android:onClick="handleClickButton8"
+            android:text="8" />
 
         <Button
             android:id="@+id/button9"
             android:layout_column="1"
-            android:layout_row="2"
-            android:onClick="handleClickButton9"
-            android:text="9"
             android:layout_columnWeight="1"
+            android:layout_row="2"
             android:layout_rowWeight="1"
-            />
+            android:onClick="handleClickButton9"
+            android:text="9" />
 
         <Button
             android:id="@+id/button10"
             android:layout_column="2"
-            android:layout_row="2"
-            android:onClick="handleClickButton10"
-            android:text="10"
             android:layout_columnWeight="1"
-            android:layout_rowWeight="1"/>
+            android:layout_row="2"
+            android:layout_rowWeight="1"
+            android:onClick="handleClickButton10"
+            android:text="10" />
 
         <Button
             android:id="@+id/buttonCancelLast"
-            android:layout_column="0"
-            android:layout_row="3"
-            android:onClick="handleClickButtonCancelLast"
-            android:text="Eff"
+            android:layout_column="3"
             android:layout_columnWeight="1"
+            android:layout_row="2"
             android:layout_rowWeight="1"
-            android:layout_columnSpan="1"/>
+            android:onClick="handleClickButtonCancelLast"
+            android:text="Eff" />
 
         <Button
             android:id="@+id/buttonOk"
             android:layout_column="1"
-            android:layout_row="3"
-            android:onClick="handleClickButtonOk"
-            android:text="Ok"
+            android:layout_columnSpan="2"
             android:layout_columnWeight="1"
+            android:layout_row="3"
             android:layout_rowWeight="1"
-            android:layout_columnSpan="2"/>
+            android:onClick="handleClickButtonOk"
+            android:text="Ok" />
 
         <Button
             android:id="@+id/buttonSaveSession"
             android:layout_column="3"
-            android:layout_row="3"
-            android:onClick="handleClickButtonSaveSession"
-            android:text="Sauve"
+            android:layout_columnSpan="1"
             android:layout_columnWeight="1"
+            android:layout_row="3"
             android:layout_rowWeight="1"
-            android:layout_columnSpan="1"/>
+            android:onClick="handleClickButtonSaveSession"
+            android:text="Sauve" />
 
 
     </GridLayout>
+
+
 
 
 </android.support.constraint.ConstraintLayout>

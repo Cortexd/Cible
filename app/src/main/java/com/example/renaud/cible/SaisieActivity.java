@@ -1,14 +1,17 @@
 package com.example.renaud.cible;
 
+import android.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -23,6 +26,12 @@ public class SaisieActivity extends AppCompatActivity {
 
     // Tir en cours
     CinqTir cinqTirsActuel;
+
+
+    static EditText etDate;
+    static EditText etTime;
+
+
 
     // Creation vue
     @Override
@@ -42,7 +51,19 @@ public class SaisieActivity extends AppCompatActivity {
         adapter = new CinqTirAdapter(SaisieActivity.this, listeDesTirs);
         mListView.setAdapter(adapter);
 
+
+        etDate = (EditText) findViewById(R.id.editTextDate);
+        etTime = (EditText) findViewById(R.id.editTextTime);
+
     }
+
+
+    public void actionEditDate(View v) {
+        // showDialog(DATE_DIALOG_ID);
+        DialogFragment newFragment = new DatePickerFragment();
+        newFragment.show(getFragmentManager(),"datePicker");
+    }
+
 
     public void ScoreClicked(int score)
     {
@@ -78,14 +99,15 @@ public class SaisieActivity extends AppCompatActivity {
     // Affichage date
     private void displayDate()
     {
-        Date aujourdhui = new Date();
+        // Date aujourdhui = new Date();
+        Calendar cal = Calendar.getInstance();
 
         DateFormat shortDateFormat = DateFormat.getDateTimeInstance(
                 DateFormat.SHORT,
                 DateFormat.SHORT);
 
-        TextView tv = (TextView) findViewById(R.id.textViewDate);
-        tv.setText(shortDateFormat.format(aujourdhui));
+       //populateSetDate(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH));
+
     }
 
 
@@ -100,5 +122,14 @@ public class SaisieActivity extends AppCompatActivity {
     public void handleClickButton8(View v) {        this.ScoreClicked(8);    }
     public void handleClickButton9(View v) {        this.ScoreClicked(9);    }
     public void handleClickButton10(View v) {       this.ScoreClicked(10);   }
+
+
+    public String populateSetDate(int year, int month, int day)
+    {
+
+        etDate.setText(String.month + "/" + day + "/" + year);
+        return (month + "/" + day + "/" + year);
+
+    }
 
 }

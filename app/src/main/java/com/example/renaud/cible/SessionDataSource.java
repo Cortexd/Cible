@@ -25,13 +25,13 @@ public class SessionDataSource {
         dbHelper = new MySQLLiteHelper(context);
     }
 
-//    public void open() throws SQLException {
-//        database = dbHelper.getWritableDatabase();
-//    }
-//
-//    public void close() {
-//        dbHelper.close();
-//    }
+    public void open() throws SQLException {
+        database = dbHelper.getWritableDatabase();
+    }
+
+    public void close() {
+        dbHelper.close();
+    }
 //
 //    public Session createComment(String comment) {
 //        ContentValues values = new ContentValues();

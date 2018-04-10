@@ -1,18 +1,15 @@
 package com.example.renaud.cible;
 
-import android.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 public class SaisieActivity extends AppCompatActivity {
@@ -35,15 +32,19 @@ public class SaisieActivity extends AppCompatActivity {
 
     // Creation vue
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_saisie);
-        displayDate();
+
+        // Permet d'eviter l'affichage direct de saisie sur le Edittex de date
+        getWindow().setSoftInputMode(
+                WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+
 
         // Creation tir1
         cinqTirsActuel = new CinqTir(1);
-
-        // creation liste
         listeDesTirs = new ArrayList<>();
 
         // Liaison listView adapter
@@ -51,20 +52,22 @@ public class SaisieActivity extends AppCompatActivity {
         adapter = new CinqTirAdapter(SaisieActivity.this, listeDesTirs);
         mListView.setAdapter(adapter);
 
-
+        // recup edir
         etDate = (EditText) findViewById(R.id.editTextDate);
         etTime = (EditText) findViewById(R.id.editTextTime);
+        displayDateAndTime();
 
     }
 
 
     public void actionEditDate(View v) {
         // showDialog(DATE_DIALOG_ID);
-        DialogFragment newFragment = new DatePickerFragment();
-        newFragment.show(getFragmentManager(),"datePicker");
+//        DialogFragment newFragment = new DatePickerFragment();
+//        newFragment.show(getFragmentManager(),"datePicker");
     }
 
 
+    // appui sur un boutton de score
     public void ScoreClicked(int score)
     {
         cinqTirsActuel.AjoutResultat(score);
@@ -72,13 +75,14 @@ public class SaisieActivity extends AppCompatActivity {
     }
 
 
-    // Annule la derniere valeur saisie
+    // Annule la derniere valeur saisie de score
     public void handleClickButtonCancelLast(View v)
     {
         cinqTirsActuel.EnleveLeDernierResultat();
         RefrechActuel();
     }
 
+    // Sauvegarde la liste des 5 scores dans le listView
     public void handleClickButtonOk(View v)
     {
         listeDesTirs.add(cinqTirsActuel);
@@ -90,6 +94,7 @@ public class SaisieActivity extends AppCompatActivity {
     }
 
 
+    // Refresh le text view
     public void RefrechActuel()
     {
         TextView tv = (TextView) findViewById(R.id.textViewSaisie);
@@ -97,18 +102,13 @@ public class SaisieActivity extends AppCompatActivity {
     }
 
     // Affichage date
-    private void displayDate()
+    private void displayDateAndTime()
     {
-        // Date aujourdhui = new Date();
         Calendar cal = Calendar.getInstance();
-
-        DateFormat shortDateFormat = DateFormat.getDateTimeInstance(
-                DateFormat.SHORT,
-                DateFormat.SHORT);
-
-       //populateSetDate(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH));
-
+        etDate.setText(String.format("%02d/%02d/%04d", cal.get(Calendar.DAY_OF_MONTH) , cal.get(Calendar.MONTH) ,cal.get(Calendar.YEAR)));
+        etTime.setText(String.format("%02d:%02d", cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE)));
     }
+
 
 
     public void handleClickButton0(View v) {        this.ScoreClicked(0);    }
@@ -123,13 +123,12 @@ public class SaisieActivity extends AppCompatActivity {
     public void handleClickButton9(View v) {        this.ScoreClicked(9);    }
     public void handleClickButton10(View v) {       this.ScoreClicked(10);   }
 
-
-    public String populateSetDate(int year, int month, int day)
+    // Sauvegarde la session en base
+    public void handleClickButtonSaveSession(View v)
     {
 
-        etDate.setText(String.month + "/" + day + "/" + year);
-        return (month + "/" + day + "/" + year);
 
     }
+
 
 }

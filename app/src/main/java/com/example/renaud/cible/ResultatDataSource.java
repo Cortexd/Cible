@@ -20,8 +20,6 @@ public class ResultatDataSource {
             MySQLLiteHelper.COLUMN_RESULTAT_ID,
             MySQLLiteHelper.COLUMN_RESULTAT_LIST,
             MySQLLiteHelper.COLUMN_RESULTAT_SESSION
-
-
     };
 
     public ResultatDataSource(Context context) {
@@ -36,26 +34,27 @@ public class ResultatDataSource {
         dbHelper.close();
     }
 
-//    public Comment createComment(String comment) {
-//        ContentValues values = new ContentValues();
-//        values.put(MySQLLiteHelper., comment);
-//        long insertId = database.insert(MySQLLiteHelper.TABLE_COMMENTS, null,
-//                values);
-//        Cursor cursor = database.query(MySQLLiteHelper.TABLE_COMMENTS,
-//                allColumns, MySQLLiteHelper.COLUMN_ID + " = " + insertId, null,
-//                null, null, null);
-//        cursor.moveToFirst();
-//        Comment newComment = cursorToComment(cursor);
-//        cursor.close();
-//        return newComment;
-//    }
+   public Resultat createResultat(Resultat resultat) {
+        ContentValues values = new ContentValues();
+        values.put(MySQLLiteHelper.COLUMN_RESULTAT_LIST, resultat.getResultat_list());
+        values.put(MySQLLiteHelper.COLUMN_RESULTAT_SESSION, resultat.getResultat_session());
 
-//    public void deleteComment(Comment comment) {
-//        long id = comment.getId();
-//        System.out.println("Comment deleted with id: " + id);
-//        database.delete(MySQLLiteHelper.TABLE_COMMENTS, MySQLLiteHelper.COLUMN_ID
-//                + " = " + id, null);
-//    }
+        long insertId = database.insert(MySQLLiteHelper.TABLE_RESULTAT, null,                values);
+        Cursor cursor = database.query(MySQLLiteHelper.TABLE_RESULTAT,
+                allColumns, MySQLLiteHelper.COLUMN_RESULTAT_ID + " = " + insertId, null,
+                null, null, null);
+
+        cursor.moveToFirst();
+        Resultat newResultat = cursorToResultat(cursor);
+        cursor.close();
+        return newResultat;
+    }
+
+    public void deleteResultat(Resultat resultat) {
+        long id = resultat.getResultat_id();
+        System.out.println("Resultat deleted with id: " + id);
+        database.delete(MySQLLiteHelper.TABLE_RESULTAT, MySQLLiteHelper.COLUMN_RESULTAT_ID                + " = " + id, null);
+    }
 
 //    public List<Comment> getAllComments() {
 //        List<Comment> comments = new ArrayList<Comment>();
@@ -74,10 +73,11 @@ public class ResultatDataSource {
 //        return comments;
 //    }
 //
-//    private Comment cursorToComment(Cursor cursor) {
-//        Comment comment = new Comment();
-//        comment.setId(cursor.getLong(0));
-//        comment.setComment(cursor.getString(1));
-//        return comment;
-//    }
+    private Resultat cursorToResultat(Cursor cursor) {
+        Resultat resultat = new Resultat();
+        resultat.setResultat_id(cursor.getLong(0));
+        resultat.setResultat_list(cursor.getString(1));
+        resultat.setResultat_session(cursor.getLong(2));
+        return resultat;
+    }
 }

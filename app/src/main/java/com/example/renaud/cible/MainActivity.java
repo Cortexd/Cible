@@ -13,6 +13,8 @@ import android.view.MenuItem;
 import android.widget.EditText;
 
 import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.components.Legend;
+import com.github.mikephil.charting.components.LegendEntry;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarData;
@@ -44,11 +46,22 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        GenerateGraphics();
+
+    }
+
+    private void GenerateGraphics()
+    {
         barChart = (BarChart) findViewById(R.id.bargraph);
 
 
         Integer[] valeursTotal = {  500,  400,  300,  500,  470};
         Float[]   valeursMoyenne = { 10f, 5.4f, 6.6f, 7.2f, 8.5f};
+        String[]  valeursDates = {"01/01/2018",
+                "02/01/2018",
+                "03/01/2018",
+                "04/01/2018",
+                "05/01/2018"               };
 
         List<BarEntry> entriesGroup1 = new ArrayList<>();
         List<BarEntry> entriesGroup2 = new ArrayList<>();
@@ -61,12 +74,13 @@ public class MainActivity extends AppCompatActivity {
 
         BarDataSet set1 = new BarDataSet(entriesGroup1, "Total");
         set1.setAxisDependency(YAxis.AxisDependency.LEFT);
+        set1.setStackLabels(valeursDates);
 
         BarDataSet set2 = new BarDataSet(entriesGroup2, "Moyenne");
         set2.setAxisDependency(YAxis.AxisDependency.RIGHT);
 
-set1.setColor(R.color.colorPrimary);
-set2.setColor(Color.GREEN);
+        set1.setColor(R.color.colorPrimary);
+        set2.setColor(Color.GREEN);
 
         float groupSpace = 0.06f;
         float barSpace = 0.02f; // x2 dataset
@@ -76,61 +90,18 @@ set2.setColor(Color.GREEN);
         BarData data = new BarData(set1, set2);
         data.setBarWidth(barWidth); // set the width of each bar
         barChart.setData(data);
-        barChart.groupBars(0f, groupSpace, barSpace); // perform the "explicit" grouping
+        barChart.groupBars(-1f, groupSpace, barSpace); // perform the "explicit" grouping
         XAxis xAxis = barChart.getXAxis();
         xAxis.setCenterAxisLabels(true);
         barChart.setTouchEnabled(true);
         barChart.setDragEnabled(true);
         barChart.setScaleEnabled(true);
+
+        barChart.getXAxis().setValueFormatter(new LabelFormatter(valeursDates));
+
         barChart.invalidate(); // refresh
 
-
-//        // Total
-//        ArrayList<BarEntry> barEntriesTotal = new ArrayList<>();
-//        barEntriesTotal.add(new BarEntry(500f,0));
-//        barEntriesTotal.add(new BarEntry(480f,1));
-//        barEntriesTotal.add(new BarEntry(90f,2));
-//        barEntriesTotal.add(new BarEntry(500f,3));
-//        barEntriesTotal.add(new BarEntry(470f,4));
-//        barEntriesTotal.add(new BarEntry(100f,5));
-//        barEntriesTotal.add(new BarEntry(330f,6));
-//        barEntriesTotal.add(new BarEntry(220f,7));
-//        BarDataSet barDataSetTotal = new BarDataSet(barEntriesTotal, "Total");
-
-//        // Moyenne
-//        ArrayList<BarEntry> barEntriesMoyenne = new ArrayList<>();
-//        barEntriesMoyenne.add(new BarEntry(8f,0));
-//        barEntriesMoyenne.add(new BarEntry(5f,1));
-//        barEntriesMoyenne.add(new BarEntry(8f,2));
-//        barEntriesMoyenne.add(new BarEntry(9f,3));
-//        barEntriesMoyenne.add(new BarEntry(7f,4));
-//        barEntriesMoyenne.add(new BarEntry(5f,5));
-//        barEntriesMoyenne.add(new BarEntry(3f,6));
-//        barEntriesMoyenne.add(new BarEntry(2f,7));
-//        BarDataSet barDataSetMoyenne = new BarDataSet(barEntriesMoyenne, "Moyenne");
-
-        // Date
-//        ArrayList<String> theDates = new ArrayList<>();
-//        theDates.add("01/01/2018");
-//        theDates.add("02/01/2018");
-//        theDates.add("03/01/2018");
-//        theDates.add("04/01/2018");
-//        theDates.add("05/01/2018");
-//        theDates.add("06/02/2018");
-//        theDates.add("07/03/2018");
-//        theDates.add("08/04/2018");
-
-//
-//        ArrayList<IBarDataSet> dataSets = new ArrayList<IBarDataSet>();
-//        dataSets.add(barDataSetTotal);
-//        dataSets.add(barDataSetMoyenne);
-//
-//        BarData theData = new BarData(dataSets);
-//        barChart.setData(theData);
-//
     }
-
-
 
 
     public void startSaisieActivity()

@@ -8,4 +8,10 @@
     tools:context="com.example.renaud.cible.MainActivity"
     tools:showIn="@layout/activity_main">
 
+    <com.github.mikephil.charting.charts.BarChart
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:id="@+id/bargraph" >
+
+    </com.github.mikephil.charting.charts.BarChart>
 </android.support.constraint.ConstraintLayout>

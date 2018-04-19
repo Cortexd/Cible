@@ -8,6 +8,11 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.renaud.cible.Base.Session;
+import com.example.renaud.cible.Base.SessionDataSource;
+import com.example.renaud.cible.Object.CinqTir;
+import com.example.renaud.cible.Object.CinqTirAdapter;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -28,6 +33,9 @@ public class SaisieActivity extends AppCompatActivity {
     static EditText etDate;
     static EditText etTime;
 
+
+    // Base de donnée
+    private SessionDataSource sessionDataSource;
 
 
     // Creation vue
@@ -56,6 +64,12 @@ public class SaisieActivity extends AppCompatActivity {
         etDate = (EditText) findViewById(R.id.editTextDate);
         etTime = (EditText) findViewById(R.id.editTextTime);
         displayDateAndTime();
+
+
+        // Base de donnes
+        sessionDataSource = new SessionDataSource(this);
+        sessionDataSource.open();
+
 
     }
 
@@ -126,6 +140,14 @@ public class SaisieActivity extends AppCompatActivity {
     // Sauvegarde la session en base
     public void handleClickButtonSaveSession(View v)
     {
+        Session session = new Session();
+        session.setSession_date(etDate.getText().toString() + etTime.getText().toString());
+        session.setSession_somme(10);
+        session.setSession_nb_tir(10);
+        session.setSession_comment("Ceci est un commentaire");
+
+
+        sessionDataSource.createSession(session, listeDesTirs);
 
 
     }

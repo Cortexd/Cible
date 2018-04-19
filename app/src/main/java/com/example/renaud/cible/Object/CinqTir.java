@@ -1,4 +1,4 @@
-package com.example.renaud.cible;
+package com.example.renaud.cible.Object;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -47,6 +47,17 @@ public class CinqTir {
         }
 
         retour = retour + " ( Tot : " + this.GetTotal() +"/" + this.GetMaxScore()  + " Moy : " + this.GetMoyenne() + ")";
+
+        return retour;
+    }
+
+    // Met en forme la ligne pour la base
+    public String GetResultatBases()
+    {
+        String retour = "";
+        for (Integer resultat : resultats) {
+            retour = retour + " " +  resultat;
+        }
 
         return retour;
     }

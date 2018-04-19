@@ -1,4 +1,4 @@
-package com.example.renaud.cible;
+package com.example.renaud.cible.Base;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;

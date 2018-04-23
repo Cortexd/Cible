@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Cible</string>
     <string name="action_settings">Params</string>
+    <string name="action_graphique">Graphique</string>
 </resources>

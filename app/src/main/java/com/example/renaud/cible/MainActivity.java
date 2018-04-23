@@ -27,7 +27,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    BarChart barChart;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,61 +46,15 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        GenerateGraphics();
+
 
     }
 
-    private void GenerateGraphics()
+
+    public void startGraphiqueActivity()
     {
-        barChart = (BarChart) findViewById(R.id.bargraph);
-
-
-        Integer[] valeursTotal = {  500,  400,  300,  500,  470};
-        Float[]   valeursMoyenne = { 10f, 5.4f, 6.6f, 7.2f, 8.5f};
-        String[]  valeursDates = {"01/01/2018",
-                "02/01/2018",
-                "03/01/2018",
-                "04/01/2018",
-                "05/01/2018"               };
-
-        List<BarEntry> entriesGroup1 = new ArrayList<>();
-        List<BarEntry> entriesGroup2 = new ArrayList<>();
-
-        // fill the lists
-        for(int i = 0; i < valeursTotal.length; i++) {
-            entriesGroup1.add(new BarEntry(i, valeursTotal[i]));
-            entriesGroup2.add(new BarEntry(i, valeursMoyenne[i]));
-        }
-
-        BarDataSet set1 = new BarDataSet(entriesGroup1, "Total");
-        set1.setAxisDependency(YAxis.AxisDependency.LEFT);
-        set1.setStackLabels(valeursDates);
-
-        BarDataSet set2 = new BarDataSet(entriesGroup2, "Moyenne");
-        set2.setAxisDependency(YAxis.AxisDependency.RIGHT);
-
-        set1.setColor(R.color.colorPrimary);
-        set2.setColor(Color.GREEN);
-
-        float groupSpace = 0.06f;
-        float barSpace = 0.02f; // x2 dataset
-        float barWidth = 0.45f; // x2 dataset
-        // (0.02 + 0.45) * 2 + 0.06 = 1.00 -> interval per "group"
-
-        BarData data = new BarData(set1, set2);
-        data.setBarWidth(barWidth); // set the width of each bar
-        barChart.setData(data);
-        barChart.groupBars(-1f, groupSpace, barSpace); // perform the "explicit" grouping
-        XAxis xAxis = barChart.getXAxis();
-        xAxis.setCenterAxisLabels(true);
-        barChart.setTouchEnabled(true);
-        barChart.setDragEnabled(true);
-        barChart.setScaleEnabled(true);
-
-        barChart.getXAxis().setValueFormatter(new LabelFormatter(valeursDates));
-
-        barChart.invalidate(); // refresh
-
+        Intent intent = new Intent(this, GraphiqueActivity.class);
+        startActivity(intent);
     }
 
 
@@ -129,9 +83,11 @@ public class MainActivity extends AppCompatActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
+        }
+        if (id == R.id.action_graphique) {
+            startGraphiqueActivity();
         }
 
         return super.onOptionsItemSelected(item);

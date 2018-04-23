@@ -104,6 +104,8 @@
             android:layout_row="0"
             android:layout_rowWeight="1"
             android:onClick="handleClickButton0"
+            android:background="@color/AntiqueWhite"
+            android:textColor="@color/Black"
             android:text="0" />
 
 
@@ -114,6 +116,8 @@
             android:layout_row="0"
             android:layout_rowWeight="1"
             android:onClick="handleClickButton1"
+            android:background="@color/AntiqueWhite"
+            android:textColor="@color/Black"
             android:text="1" />
 
         <Button
@@ -123,6 +127,8 @@
             android:layout_row="0"
             android:layout_rowWeight="1"
             android:onClick="handleClickButton2"
+            android:background="@color/AntiqueWhite"
+            android:textColor="@color/Black"
             android:text="2" />
 
         <Button
@@ -132,6 +138,8 @@
             android:layout_row="0"
             android:layout_rowWeight="1"
             android:onClick="handleClickButton3"
+            android:background="@color/AntiqueWhite"
+            android:textColor="@color/Black"
             android:text="3" />
 
         <Button
@@ -141,6 +149,8 @@
             android:layout_row="1"
             android:layout_rowWeight="1"
             android:onClick="handleClickButton4"
+            android:background="@color/AntiqueWhite"
+            android:textColor="@color/Black"
             android:text="4" />
 
         <Button
@@ -150,6 +160,8 @@
             android:layout_row="1"
             android:layout_rowWeight="1"
             android:onClick="handleClickButton5"
+            android:background="@color/AntiqueWhite"
+            android:textColor="@color/Black"
             android:text="5" />
 
         <Button
@@ -159,6 +171,8 @@
             android:layout_row="1"
             android:layout_rowWeight="1"
             android:onClick="handleClickButton6"
+            android:background="@color/AntiqueWhite"
+            android:textColor="@color/Black"
             android:text="6" />
 
         <Button
@@ -168,6 +182,8 @@
             android:layout_row="1"
             android:layout_rowWeight="1"
             android:onClick="handleClickButton7"
+            android:background="@color/Black"
+            android:textColor="@color/AntiqueWhite"
             android:text="7" />
 
         <Button
@@ -177,6 +193,8 @@
             android:layout_row="2"
             android:layout_rowWeight="1"
             android:onClick="handleClickButton8"
+            android:background="@color/Black"
+            android:textColor="@color/AntiqueWhite"
             android:text="8" />
 
         <Button
@@ -186,6 +204,8 @@
             android:layout_row="2"
             android:layout_rowWeight="1"
             android:onClick="handleClickButton9"
+            android:background="@color/Black"
+            android:textColor="@color/AntiqueWhite"
             android:text="9" />
 
         <Button
@@ -195,6 +215,8 @@
             android:layout_row="2"
             android:layout_rowWeight="1"
             android:onClick="handleClickButton10"
+            android:background="@color/Black"
+            android:textColor="@color/AntiqueWhite"
             android:text="10" />
 
         <Button

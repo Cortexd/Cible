@@ -8,6 +8,7 @@
         android:title="@string/action_settings"
         app:showAsAction="never" />
     <item
+        android:id="@+id/action_graphique"
         android:orderInCategory="101"
-        android:title="Item" />
+        android:title="@string/action_graphique" />
 </menu>

@@ -1,8 +1,5 @@
 package com.example.renaud.cible.Base;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -10,6 +7,9 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.example.renaud.cible.Object.CinqTir;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class SessionDataSource {
 
@@ -19,9 +19,9 @@ public class SessionDataSource {
     private String[] allColumnsSession = {
             MySQLLiteHelper.COLUMN_SESSION_ID,
             MySQLLiteHelper.COLUMN_SESSION_DATE,
-            MySQLLiteHelper.COLUMN_SESSION_NB_TIR,
+            MySQLLiteHelper.COLUMN_SESSION_COMMENT,
             MySQLLiteHelper.COLUMN_SESSION_SOMME,
-            MySQLLiteHelper.COLUMN_SESSION_COMMENT    };
+            MySQLLiteHelper.COLUMN_SESSION_NB_TIR};
 
     private String[] allColumnsResultat = {
             MySQLLiteHelper.COLUMN_RESULTAT_ID,
@@ -86,20 +86,22 @@ public class SessionDataSource {
                 + " = " + id, null);
     }
 
-    public List<Session> getAllSessions() {List<Session> comments = new ArrayList<Session>();
+    public List<Session> getAllSessions() {
+
+        List<Session> sessions = new ArrayList<Session>();
 
         Cursor cursor = database.query(MySQLLiteHelper.TABLE_SESSIONS,
                 allColumnsSession, null, null, null, null, null);
 
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
-            Session comment = cursorToSession(cursor);
-            comments.add(comment);
+            Session sess = cursorToSession(cursor);
+            sessions.add(sess);
             cursor.moveToNext();
         }
         // assurez-vous de la fermeture du curseur
         cursor.close();
-        return comments;
+        return sessions;
     }
 
     private Session cursorToSession(Cursor cursor) {
@@ -107,12 +109,13 @@ public class SessionDataSource {
         session.setSession_id(cursor.getLong(0));
         session.setSession_date(cursor.getString(1));
         session.setSession_comment(cursor.getString(2));
-        session.setSession_nb_tir(cursor.getInt(3));
-        session.setSession_somme(cursor.getInt(4));
+        session.setSession_somme(cursor.getInt(3));
+        session.setSession_nb_tir(cursor.getInt(4));
         return session;
     }
 
     public void createResultat(Resultat resultat) {
+
         ContentValues values = new ContentValues();
         values.put(MySQLLiteHelper.COLUMN_RESULTAT_LIST, resultat.getResultat_list());
         values.put(MySQLLiteHelper.COLUMN_RESULTAT_SESSION, resultat.getResultat_session());

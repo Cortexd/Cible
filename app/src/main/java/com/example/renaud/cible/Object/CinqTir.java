@@ -1,7 +1,6 @@
 package com.example.renaud.cible.Object;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -10,8 +9,8 @@ import java.util.List;
 
 public class CinqTir {
 
-    List<Integer> resultats;
-    Integer numero;
+    private List<Integer> resultats;
+    private Integer numero;
 
     public CinqTir(int numero)
     {
@@ -41,14 +40,14 @@ public class CinqTir {
     // Met en forme la ligne pour affichage
     public String GetResultatLigne()
     {
-        String retour = "";
+        StringBuilder retour = new StringBuilder();
         for (Integer resultat : resultats) {
-            retour = retour + " " +  resultat;
+            retour.append(" ").append(resultat);
         }
 
-        retour = retour + " ( Tot : " + this.GetTotal() +"/" + this.GetMaxScore()  + " Moy : " + this.GetMoyenne() + ")";
+        retour.append(" ( Tot : ").append(this.GetTotal()).append("/").append(this.GetMaxScore()).append(" Moy : ").append(this.GetMoyenne()).append(")");
 
-        return retour;
+        return retour.toString();
     }
 
     // Met en forme la ligne pour la base
@@ -62,7 +61,12 @@ public class CinqTir {
         return retour;
     }
 
-    private int GetMaxScore()
+    public int GetNbTir() {
+        return this.resultats.size();
+    }
+
+
+    public int GetMaxScore()
     {
         if (this.resultats.size() > 0)
         {
@@ -74,7 +78,7 @@ public class CinqTir {
         }
     }
 
-    private int GetTotal()
+    public int GetTotal()
     {
         int somme = 0;
         for (Integer resultat : resultats) {
@@ -84,7 +88,7 @@ public class CinqTir {
         return somme;
     }
 
-    private String GetMoyenne()
+    public String GetMoyenne()
     {
         if (this.resultats.size() > 0)
         {

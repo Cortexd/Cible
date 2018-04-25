@@ -1,7 +1,7 @@
 package com.example.renaud.cible;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.EditText;
@@ -28,6 +28,10 @@ public class SaisieActivity extends AppCompatActivity {
 
     // Tir en cours
     CinqTir cinqTirsActuel;
+
+    // somme
+    int somme = 0;
+    int nb_tir = 0;
 
 
     static EditText etDate;
@@ -56,13 +60,13 @@ public class SaisieActivity extends AppCompatActivity {
         listeDesTirs = new ArrayList<>();
 
         // Liaison listView adapter
-        mListView = (ListView) findViewById(R.id.listView);
+        mListView = findViewById(R.id.listView);
         adapter = new CinqTirAdapter(SaisieActivity.this, listeDesTirs);
         mListView.setAdapter(adapter);
 
         // recup edir
-        etDate = (EditText) findViewById(R.id.editTextDate);
-        etTime = (EditText) findViewById(R.id.editTextTime);
+        etDate = findViewById(R.id.editTextDate);
+        etTime = findViewById(R.id.editTextTime);
         displayDateAndTime();
 
 
@@ -101,9 +105,13 @@ public class SaisieActivity extends AppCompatActivity {
     {
         listeDesTirs.add(cinqTirsActuel);
 
+        somme += cinqTirsActuel.GetTotal();
+        nb_tir += cinqTirsActuel.GetNbTir();
+
         int compteur = listeDesTirs.size()+1;
         cinqTirsActuel = new CinqTir(compteur);
         adapter.notifyDataSetChanged();
+
         RefrechActuel();
     }
 
@@ -111,7 +119,7 @@ public class SaisieActivity extends AppCompatActivity {
     // Refresh le text view
     public void RefrechActuel()
     {
-        TextView tv = (TextView) findViewById(R.id.textViewSaisie);
+        TextView tv = findViewById(R.id.textViewSaisie);
         tv.setText(cinqTirsActuel.GetResultatLigne());
     }
 
@@ -141,9 +149,9 @@ public class SaisieActivity extends AppCompatActivity {
     public void handleClickButtonSaveSession(View v)
     {
         Session session = new Session();
-        session.setSession_date(etDate.getText().toString() + etTime.getText().toString());
-        session.setSession_somme(10);
-        session.setSession_nb_tir(10);
+        session.setSession_date(etDate.getText().toString() + " " + etTime.getText().toString());
+        session.setSession_somme(somme);
+        session.setSession_nb_tir(nb_tir);
         session.setSession_comment("Ceci est un commentaire");
 
 

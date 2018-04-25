@@ -1,9 +1,10 @@
 package com.example.renaud.cible;
 
 import android.graphics.Color;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 
+import com.example.renaud.cible.Base.Session;
 import com.example.renaud.cible.Base.SessionDataSource;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.components.XAxis;
@@ -42,23 +43,41 @@ public class GraphiqueActivity extends AppCompatActivity {
 
     private void GetDataFromBase() {
 
-        valeursTotal.add(500);
-        valeursTotal.add(500);
-        valeursTotal.add(500);
-        valeursTotal.add(500);
-        valeursTotal.add(500);
+//        valeursTotal.add(500);
+//        valeursTotal.add(500);
+//        valeursTotal.add(500);
+//        valeursTotal.add(500);
+//        valeursTotal.add(500);
+//        valeursTotal.add(500);
+//
+//
+//
+//        valeursMoyenne.add(5.4f);
+//        valeursMoyenne.add(5.4f);
+//        valeursMoyenne.add(5.4f);
+//        valeursMoyenne.add(5.4f);
+//        valeursMoyenne.add(5.4f);
+//        valeursMoyenne.add(5.4f);
+//
+//
+//        valeursDates.add("01/01/2018");
+//        valeursDates.add("01/01/2018");
+//        valeursDates.add("01/01/2018");
+//        valeursDates.add("01/01/2018");
+//        valeursDates.add("01/01/2018");
+//        valeursDates.add("01/01/2018");
 
-        valeursMoyenne.add(5.4f);
-        valeursMoyenne.add(5.4f);
-        valeursMoyenne.add(5.4f);
-        valeursMoyenne.add(5.4f);
-        valeursMoyenne.add(5.4f);
 
-        valeursDates.add("01/01/2018");
-        valeursDates.add("01/01/2018");
-        valeursDates.add("01/01/2018");
-        valeursDates.add("01/01/2018");
-        valeursDates.add("01/01/2018");
+        List<Session> allSessions = sessionDataSource.getAllSessions();
+
+        for (Session session : allSessions) {
+
+            valeursTotal.add(session.getSession_somme());
+            valeursMoyenne.add(session.getSession_moyenne());
+            valeursDates.add(session.getSession_date());
+        }
+
+
 
     }
 
@@ -66,14 +85,7 @@ public class GraphiqueActivity extends AppCompatActivity {
     private void GenerateGraphics()
     {
 
-
-
-
-        barChart = (BarChart) findViewById(R.id.bargraph);
-
-
-
-
+        barChart = findViewById(R.id.bargraph);
 
         List<BarEntry> entriesGroup1 = new ArrayList<>();
         List<BarEntry> entriesGroup2 = new ArrayList<>();
@@ -100,7 +112,7 @@ public class GraphiqueActivity extends AppCompatActivity {
 
         float groupSpace = 0.06f;
         float barSpace = 0.02f; // x2 dataset
-        float barWidth = 0.45f; // x2 dataset
+        float barWidth = 0.35f; // x2 dataset
         // (0.02 + 0.45) * 2 + 0.06 = 1.00 -> interval per "group"
 
         BarData data = new BarData(set1, set2);
@@ -113,7 +125,7 @@ public class GraphiqueActivity extends AppCompatActivity {
         barChart.setDragEnabled(true);
         barChart.setScaleEnabled(true);
 
-        barChart.getXAxis().setValueFormatter(new LabelFormatter(arrayDate));
+        //     barChart.getXAxis().setValueFormatter(new LabelFormatter(arrayDate));
 
         barChart.invalidate(); // refresh
 

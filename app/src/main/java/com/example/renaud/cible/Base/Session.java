@@ -34,15 +34,24 @@ public class Session {
     }
 
     public int getSession_somme() {
-        return session_somme;
+        return this.session_somme;
     }
 
     public void setSession_somme(int session_somme) {
         this.session_somme = session_somme;
     }
 
+    public float getSession_moyenne() {
+        if (this.session_nb_tir > 0) {
+            return (float) this.session_somme / this.session_nb_tir;
+        } else {
+            return 0;
+        }
+
+    }
+
     public int getSession_nb_tir() {
-        return session_nb_tir;
+        return this.session_nb_tir;
     }
 
     public void setSession_nb_tir(int session_nb_tir) {

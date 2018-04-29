@@ -42,8 +42,11 @@ public class Session {
     }
 
     public float getSession_moyenne() {
+
         if (this.session_nb_tir > 0) {
-            return (float) this.session_somme / this.session_nb_tir;
+            float resultat = (float) this.session_somme / this.session_nb_tir;
+            return Math.round(resultat * 100.0f) / 100.0f;
+
         } else {
             return 0;
         }
